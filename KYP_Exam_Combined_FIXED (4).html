@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KYP Final Exam - Bihar Skill Development Mission</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Poppins",sans-serif;background:#e8f4fd;min-height:100vh;overflow-x:hidden;margin-bottom:0;padding-bottom:0;}
+:root{
+  --navy:#1a3c6e;--navy-light:#2a5298;--white:#fff;
+  --red:#e53935;--orange:#f57c00;--bg:#e8f4fd;
+  --shadow:0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* ===== BACK BUTTON ===== */
+
+
+/* ===== HEADER ===== */
+.header{background:var(--white);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.header-left{display:flex;align-items:center;gap:12px;}
+.logo-img{height:52px;width:auto;object-fit:contain;}
+.org-name{font-size:17px;font-weight:700;color:var(--navy);}
+.org-sub{font-size:12px;color:#666;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.lang-wrap{display:flex;align-items:center;gap:6px;border:1px solid #ccc;border-radius:20px;padding:6px 14px;background:white;font-size:13px;color:var(--navy);font-weight:500;}
+.lang-wrap select{border:none;background:transparent;font-family:"Poppins",sans-serif;font-size:13px;color:var(--navy);font-weight:500;cursor:pointer;outline:none;}
+.exam-bar{background:#d6eaf8;padding:8px 24px;font-size:13px;font-weight:600;color:var(--navy);display:flex;align-items:center;justify-content:space-between;}
+.end-btn{background:var(--red);color:white;border:none;padding:7px 20px;border-radius:20px;font-family:"Poppins",sans-serif;font-weight:600;font-size:13px;cursor:pointer;display:none;}
+.end-btn:hover{opacity:0.88;}
+.demo-badge{font-size:13px;font-weight:600;color:var(--navy-light);background:#e3f0ff;padding:6px 14px;border-radius:20px;display:none;}
+
+/* ===== LANDING PAGE ===== */
+#landingPage{}
+.main{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 110px);padding:30px 20px;}
+.card{background:var(--white);border-radius:12px;box-shadow:var(--shadow);width:100%;max-width:780px;overflow:hidden;}
+.card-header{padding:16px 24px;text-align:center;border-bottom:1px solid #e0ecf7;font-size:15px;font-weight:600;color:#444;background:#f5faff;}
+.card-body{padding:32px 24px 28px;}
+.choose-title{text-align:center;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:28px;}
+.sections-row{display:flex;gap:16px;justify-content:center;margin-bottom:28px;}
+.section-card{flex:1;max-width:210px;border:2px solid #c5ddf5;border-radius:10px;padding:20px 16px 18px;cursor:pointer;transition:all 0.2s;background:#f7fbff;}
+.section-card:hover{border-color:var(--navy-light);box-shadow:0 4px 12px rgba(26,60,110,0.15);}
+.section-card.selected{border-color:var(--navy);background:#e3f0ff;box-shadow:0 4px 14px rgba(26,60,110,0.2);}
+.sec-badge{display:inline-flex;align-items:center;background:var(--navy);color:white;font-size:11px;font-weight:700;padding:4px 14px 4px 10px;border-radius:4px;margin-bottom:14px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,0 100%);}
+.sec-badge.s2{background:#1565c0;}.sec-badge.s3{background:#1a6e3c;}
+.sec-name{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.sec-time{display:flex;align-items:center;gap:5px;font-size:12px;color:#555;font-weight:500;}
+.selected-label{text-align:center;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:20px;min-height:22px;}
+.continue-btn{display:block;margin:0 auto;padding:12px 52px;background:var(--navy);color:white;border:none;border-radius:8px;font-family:"Poppins",sans-serif;font-weight:700;font-size:14px;cursor:pointer;letter-spacing:1px;transition:background 0.2s;}
+.continue-btn:hover{background:var(--navy-light);}
+
+/* ===== QUIZ PAGE ===== */
+#quizPage{display:none;flex-direction:column;min-height:100vh;}
+.quiz-body{flex:1;}
+.quiz-main{display:flex;padding:15px 15px 65px;min-height:calc(100vh - 230px);}
+.quiz-panel{flex:1;background:var(--white);border-radius:10px;padding:20px;box-shadow:var(--shadow);margin-right:15px;display:flex;flex-direction:column;}
+.side-panel{width:260px;background:var(--white);border-radius:10px;padding:16px;box-shadow:var(--shadow);flex-shrink:0;}
+.q-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--bg);}
+.timer{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:var(--navy);background:#e3f0ff;padding:6px 14px;border-radius:20px;}
+.q-label{font-size:15px;font-weight:700;color:var(--navy);}
+.q-subject{font-size:13px;font-weight:600;color:var(--navy-light);background:#e3f0ff;padding:4px 12px;border-radius:12px;}
+.q-text{font-size:15px;font-weight:600;color:#222;text-align:center;margin:10px 0 14px;line-height:1.5;min-height:40px;}
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start;}
+.option{display:flex;align-items:center;gap:8px;background:#f7fbff;border:2px solid #dde8f5;border-radius:10px;padding:10px 14px;cursor:pointer;transition:all 0.2s;font-size:13px;color:#333;font-weight:500;}
+.option:hover{background:#ddeeff;border-color:#90c0e8;}
+.option.selected{background:var(--navy);border-color:var(--navy);color:white;}
+.option-num{font-weight:700;min-width:20px;font-size:13px;}
+.option.selected .option-num{color:white;}
+.side-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;}
+.q-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:12px;}
+.q-circle{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;border:2px solid #ddd;background:#f0f0f0;color:#555;}
+.q-circle.attempted{background:var(--navy);border-color:var(--navy);color:white;}
+.q-circle.current{background:white;border-color:var(--navy);color:var(--navy);}
+.q-circle.later{background:var(--orange);border-color:var(--orange);color:white;}
+.legend{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+.legend-item{display:flex;align-items:center;gap:7px;font-size:11px;color:#555;}
+.legend-dot{width:13px;height:13px;border-radius:50%;}
+.legend-dot.att{background:var(--navy);}.legend-dot.not{background:#ccc;border:1px solid #aaa;}.legend-dot.lat{background:var(--orange);}
+.bottom-nav{background:var(--navy);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;bottom:0;z-index:100;}
+.nav-btn{padding:9px 24px;border-radius:20px;border:none;font-family:"Poppins",sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+.prev-btn{background:#546e8a;color:white;}.prev-btn:disabled{opacity:0.5;cursor:default;}
+.next-btn{background:#1565c0;color:white;}.next-btn:hover{background:#0d47a1;}
+.later-check{display:flex;align-items:center;gap:8px;color:white;font-size:13px;cursor:pointer;}
+.later-check input{width:16px;height:16px;cursor:pointer;accent-color:var(--orange);}
+
+/* ===== RESULTS PAGE ===== */
+#resultsPage{display:none;min-height:100vh;background:var(--bg);flex-direction:column;}
+.results-header{background:var(--navy);color:white;padding:20px;text-align:center;}
+.results-header h2{font-size:20px;font-weight:700;}
+.results-header p{font-size:13px;opacity:0.8;margin-top:4px;}
+.score-card{background:white;margin:20px;border-radius:14px;padding:25px;text-align:center;box-shadow:var(--shadow);}
+.score-big{font-size:52px;font-weight:700;color:var(--navy);line-height:1;}
+.score-out{font-size:18px;color:#666;margin-top:6px;}
+.score-pct{font-size:22px;font-weight:600;margin-top:10px;}
+.pass-badge{display:inline-block;margin-top:12px;padding:6px 22px;border-radius:20px;font-weight:700;font-size:14px;}
+.pass{background:#e8f5e9;color:#2e7d32;}.fail{background:#ffebee;color:#c62828;}
+.results-table-wrap{margin:0 20px 20px;background:white;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);}
+.results-table{width:100%;border-collapse:collapse;font-size:13px;}
+.results-table th{background:var(--navy);color:white;padding:12px 10px;text-align:left;font-weight:600;}
+.results-table td{padding:11px 10px;border-bottom:1px solid #eee;vertical-align:top;}
+.results-table tr.correct{background:#f1f8f1;}.results-table tr.wrong{background:#fff5f5;}.results-table tr.skipped{background:#fafafa;}
+.results-btns{display:flex;flex-direction:row;gap:16px;justify-content:center;align-items:center;padding:10px 0 20px;}
+.retry-btn,.home-btn{padding:13px 40px;background:var(--navy);color:white;border:none;border-radius:30px;font-family:"Poppins",sans-serif;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 3px 10px rgba(26,60,110,0.25);transition:background 0.2s;}
+.retry-btn:hover,.home-btn:hover{background:#2a5298;}
+.results-footer{text-align:center;padding:16px;color:#888;font-size:13px;border-top:1px solid #e0e0e0;margin-top:auto;}
+.results-footer span{font-weight:600;color:var(--navy);}
+
+/* ===== MODAL ===== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1000;align-items:center;justify-content:center;}
+.modal-overlay.show{display:flex;}
+.modal{background:white;border-radius:14px;padding:30px;max-width:380px;width:90%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.2);}
+.modal h3{font-size:17px;color:var(--navy);margin-bottom:10px;}
+.modal p{font-size:13px;color:#555;margin-bottom:22px;line-height:1.6;}
+.modal-btns{display:flex;gap:12px;justify-content:center;}
+.modal-btn{padding:9px 24px;border-radius:20px;border:none;font-family:"Poppins",sans-serif;font-weight:600;font-size:13px;cursor:pointer;}
+.modal-cancel{background:#eee;color:#333;}.modal-confirm{background:var(--red);color:white;}
+
+@media(max-width:700px){
+  .quiz-main{flex-direction:column;padding:10px 10px 65px;}
+  .quiz-panel{margin-right:0;margin-bottom:12px;}
+  .side-panel{width:100%;}
+  .options-grid{grid-template-columns:1fr;}
+  .q-grid{grid-template-columns:repeat(7,1fr);}
+  .q-circle{width:30px;height:30px;font-size:11px;}
+  .results-table{font-size:11px;}
+  .results-table th,.results-table td{padding:8px 6px;}
+  .sections-row{flex-direction:column;align-items:center;}
+  .section-card{max-width:100%;width:100%;}
+  .choose-title{font-size:18px;}
+}
+</style>
+</head>
+<body>
+
+<!-- SHARED HEADER -->
+<div class="header">
+  <div class="header-left">
+    <img src="data:image/png;base64,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" class="logo-img" alt="SAMARTH"/>
+    <div>
+      <div class="org-name">Bihar Skill Development Mission</div>
+      <div class="org-sub">Government of Bihar</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="lang-wrap" id="langWrap">
+      🌐
+      <select id="langSel" onchange="changeLang(this.value)">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+      </select>
+      ▾
+    </div>
+    <div class="demo-badge" id="demoBadge">MOCK TEST</div>
+  </div>
+</div>
+
+<div class="exam-bar">
+  <span id="examBarTitle">Final Exam for KYP</span>
+  <button class="end-btn" id="endBtn" onclick="confirmEnd()">End Test</button>
+</div>
+
+<!-- ===== LANDING PAGE ===== -->
+<div id="landingPage">
+  <div class="main">
+    <div class="card">
+      <div class="card-header" id="instrHead">Instructions</div>
+      <div class="card-body">
+        <div class="choose-title" id="chooseTitle">Choose a section to attempt</div>
+        <div class="sections-row">
+          <div class="section-card selected" id="card-cit" onclick="selectSec('cit')">
+            <div class="sec-badge">Section 1</div>
+            <div class="sec-name">BS-CIT</div>
+            <div class="sec-time">🕐 <span class="tval" data-key="t1">60 min</span></div>
+          </div>
+          <div class="section-card" id="card-cls" onclick="selectSec('cls')">
+            <div class="sec-badge s2">Section 2</div>
+            <div class="sec-name">BS-CLS</div>
+            <div class="sec-time">🕐 <span class="tval" data-key="t2">40 min</span></div>
+          </div>
+          <div class="section-card" id="card-css" onclick="selectSec('css')">
+            <div class="sec-badge s3">Section 3</div>
+            <div class="sec-name">BS-CSS</div>
+            <div class="sec-time">🕐 <span class="tval" data-key="t3">20 min</span></div>
+          </div>
+        </div>
+        <div class="selected-label" id="selLabel">BS-CIT</div>
+        <button class="continue-btn" id="contBtn" onclick="startExam()">CONTINUE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ PAGE ===== -->
+<div id="quizPage">
+  <div class="quiz-body">
+    <div class="quiz-main">
+      <div class="quiz-panel">
+        <div class="q-header">
+          <div class="timer">🕐 <span id="timerDisplay">00:00</span></div>
+          <div class="q-label" id="qLabel">QUESTION NO 1</div>
+          <div class="q-subject" id="qSubject">BS-CIT</div>
+        </div>
+        <div class="q-text" id="qText"></div>
+        <div class="options-grid" id="optionsGrid"></div>
+      </div>
+      <div class="side-panel">
+        <div class="side-title">Questions:</div>
+        <div class="q-grid" id="qGrid"></div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot att"></div> Attempted</div>
+          <div class="legend-item"><div class="legend-dot not"></div> Not attempted</div>
+          <div class="legend-item"><div class="legend-dot lat"></div> I'll Attempt it later</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn prev-btn" id="prevBtn" onclick="navigate(-1)" disabled>◀ PREV</button>
+    <label class="later-check">
+      <input type="checkbox" id="laterCheck" onchange="toggleLater()"/> I'll attempt it later
+    </label>
+    <button class="nav-btn next-btn" id="nextBtn">NEXT ▶</button>
+  </div>
+</div>
+
+<!-- ===== RESULTS PAGE ===== -->
+<div id="resultsPage">
+  <div class="results-header">
+    <h2 id="resultsTitle">Exam Results</h2>
+    <p>Bihar Skill Development Mission — MOCK TEST</p>
+  </div>
+  <div class="score-card">
+    <div class="score-big" id="scoreBig">0</div>
+    <div class="score-out" id="scoreOut">out of 40</div>
+    <div class="score-pct" id="scorePct">0%</div>
+    <div class="pass-badge" id="passBadge">-</div>
+  </div>
+  <div class="results-table-wrap">
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Q.No</th><th>Question</th><th>Your Answer</th><th>Correct Answer</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+  </div>
+  <div class="results-btns">
+    <button class="retry-btn" onclick="retryTest()">🔄 Retry Test</button>
+    <button class="home-btn" onclick="kypGoHome()">🏠 Go to Home</button>
+  </div>
+  <div class="results-footer">Developed By <span>Sonu Sir</span></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>⚠️ End Test</h3>
+    <p>Are you sure you want to end the test?<br/>Unanswered questions will be marked as <b>Not Attempted</b>.</p>
+    <div class="modal-btns">
+      <button class="modal-btn modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-btn modal-confirm" onclick="submitTest()">Yes, Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== QUESTION DATA =====
+const citQuestions = [
+  {
+    en:{q:"What is one effect of burning e-waste?",opts:["Produces fresh air","Releases harmful gases","Improves soil","Produces gold"]},
+    hi:{q:"ई-कचरा जलाने का एक प्रभाव क्या है?",opts:["ताजी हवा उत्पन्न होती है","हानिकारक गैसें निकलती हैं","मिट्टी में सुधार होता है","सोना बनता है"]},
+    correct:2
+  },
+  {
+    en:{q:"When should you seek professional help?",opts:["Storage is full","App won't open","Device won't turn on at all","Wi-Fi disconnects once"]},
+    hi:{q:"आपको पेशेवर मदद कब लेनी चाहिए?",opts:["स्टोरेज भर गई है","ऐप नहीं खुलती","डिवाइस बिल्कुल चालू नहीं होती","Wi-Fi एक बार डिस्कनेक्ट हुआ"]},
+    correct:3
+  },
+  {
+    en:{q:"What is a benefit of CRM automation?",opts:["Customers get confused","Routine tasks are done faster","Slower service","Manual work increases"]},
+    hi:{q:"CRM ऑटोमेशन का क्या लाभ है?",opts:["ग्राहक भ्रमित होते हैं","नियमित कार्य तेज़ी से होते हैं","धीमी सेवा","मैन्युअल कार्य बढ़ता है"]},
+    correct:2
+  },
+  {
+    en:{q:"What does this code do? if x > 5:",opts:["Saves a file","Checks a condition","Divides numbers","Writes a story"]},
+    hi:{q:"यह कोड क्या करता है? if x > 5:",opts:["फ़ाइल सेव करता है","एक शर्त जाँचता है","संख्याएँ विभाजित करता है","एक कहानी लिखता है"]},
+    correct:2
+  },
+  {
+    en:{q:"What is a verified seller?",opts:["A seller with many bad reviews","A seller approved by the platform","A new seller","A seller who gives discounts"]},
+    hi:{q:"सत्यापित विक्रेता क्या होता है?",opts:["बहुत बुरी समीक्षाओं वाला विक्रेता","प्लेटफ़ॉर्म द्वारा अनुमोदित विक्रेता","नया विक्रेता","छूट देने वाला विक्रेता"]},
+    correct:2
+  },
+  {
+    en:{q:"Which skill is part of basic digital skills?",opts:["Typing","Coding","Machine learning","Cybersecurity"]},
+    hi:{q:"बुनियादी डिजिटल कौशल का हिस्सा कौन-सा है?",opts:["टाइपिंग","कोडिंग","मशीन लर्निंग","साइबर सुरक्षा"]},
+    correct:1
+  },
+  {
+    en:{q:"To access 'Power & battery' on Windows, you go to:",opts:["Control Panel","Settings > System","Task Manager","File Explorer"]},
+    hi:{q:"Windows पर 'Power & battery' एक्सेस करने के लिए आप जाते हैं:",opts:["कंट्रोल पैनल","Settings > System","टास्क मैनेजर","फ़ाइल एक्सप्लोरर"]},
+    correct:2
+  },
+  {
+    en:{q:"What is 'Free Cancellation'?",opts:["Cancel anytime without booking","Extra charges apply","Cancel without any charges","No money refunded"]},
+    hi:{q:"'फ्री कैंसिलेशन' क्या है?",opts:["बिना बुकिंग कभी भी रद्द करें","अतिरिक्त शुल्क लागू होते हैं","बिना किसी शुल्क के रद्द करें","कोई पैसा वापस नहीं"]},
+    correct:3
+  },
+  {
+    en:{q:"What is your right as an internet user?",opts:["To harm others","To share private info of others","To spread fake news","To express yourself respectfully"]},
+    hi:{q:"इंटरनेट उपयोगकर्ता के रूप में आपका अधिकार क्या है?",opts:["दूसरों को नुकसान पहुँचाना","दूसरों की निजी जानकारी साझा करना","फर्जी खबरें फैलाना","सम्मानपूर्वक खुद को अभिव्यक्त करना"]},
+    correct:4
+  },
+  {
+    en:{q:"Which of the following is a digital customer service channel?",opts:["Print Ads","Live Chat","Door-to-door service","Post Office"]},
+    hi:{q:"निम्नलिखित में से कौन-सा डिजिटल ग्राहक सेवा चैनल है?",opts:["प्रिंट विज्ञापन","लाइव चैट","घर-घर सेवा","डाकघर"]},
+    correct:2
+  },
+  {
+    en:{q:"Which of these is NOT a way to save energy on devices?",opts:["Closing unused apps","Using sleep mode","Adjusting brightness","Playing games all day"]},
+    hi:{q:"इनमें से कौन-सा डिवाइस पर ऊर्जा बचाने का तरीका नहीं है?",opts:["अप्रयुक्त ऐप्स बंद करना","स्लीप मोड का उपयोग","चमक समायोजित करना","दिन भर गेम खेलना"]},
+    correct:4
+  },
+  {
+    en:{q:"Which of these steps helps fix a frozen device?",opts:["Turn off antivirus","Restart the device","Open more apps","Increase brightness"]},
+    hi:{q:"फ्रोज़न डिवाइस को ठीक करने में कौन-सा कदम मदद करता है?",opts:["एंटीवायरस बंद करें","डिवाइस पुनः प्रारंभ करें","अधिक ऐप्स खोलें","चमक बढ़ाएँ"]},
+    correct:2
+  },
+  {
+    en:{q:"What is the best position for your screen?",opts:["Below your knees","At eye level","Above your head","Near your feet"]},
+    hi:{q:"आपकी स्क्रीन की सबसे अच्छी स्थिति क्या है?",opts:["घुटनों के नीचे","आँखों के स्तर पर","सिर के ऊपर","पैरों के पास"]},
+    correct:2
+  },
+  {
+    en:{q:"Why is encryption important in financial apps?",opts:["To share files publicly","To increase app size","To slow down the phone","To protect data from theft"]},
+    hi:{q:"वित्तीय ऐप्स में एन्क्रिप्शन क्यों महत्वपूर्ण है?",opts:["फ़ाइलें सार्वजनिक रूप से साझा करने के लिए","ऐप का आकार बढ़ाने के लिए","फोन को धीमा करने के लिए","डेटा को चोरी से बचाने के लिए"]},
+    correct:4
+  },
+  {
+    en:{q:"Why should you update antivirus software?",opts:["To install games","To change wallpapers","To reduce battery","To get new virus definitions"]},
+    hi:{q:"एंटीवायरस सॉफ़्टवेयर को अपडेट क्यों करना चाहिए?",opts:["गेम इंस्टॉल करने के लिए","वॉलपेपर बदलने के लिए","बैटरी कम करने के लिए","नई वायरस परिभाषाएँ प्राप्त करने के लिए"]},
+    correct:4
+  },
+  {
+    en:{q:"Which industry commonly uses robots for assembling cars?",opts:["Fashion","Agriculture","Education","Automotive"]},
+    hi:{q:"कौन-सा उद्योग कारें असेंबल करने के लिए रोबोट का उपयोग करता है?",opts:["फैशन","कृषि","शिक्षा","ऑटोमोटिव"]},
+    correct:4
+  },
+  {
+    en:{q:"What is a key difference between free and paid OTT content?",opts:["Free content cannot be streamed","Paid content has ads","Free content is always better","Paid content is usually ad-free"]},
+    hi:{q:"मुफ़्त और सशुल्क OTT सामग्री में मुख्य अंतर क्या है?",opts:["मुफ़्त सामग्री स्ट्रीम नहीं की जा सकती","सशुल्क सामग्री में विज्ञापन हैं","मुफ़्त सामग्री हमेशा बेहतर होती है","सशुल्क सामग्री आमतौर पर विज्ञापन-मुक्त होती है"]},
+    correct:4
+  },
+  {
+    en:{q:"Which file can you restore from the Recycle Bin?",opts:["Recently deleted file","File from external drive","Permanently deleted file","File deleted by another user"]},
+    hi:{q:"रीसायकल बिन से कौन-सी फ़ाइल पुनर्स्थापित की जा सकती है?",opts:["हाल ही में हटाई गई फ़ाइल","बाहरी ड्राइव से फ़ाइल","स्थायी रूप से हटाई गई फ़ाइल","किसी अन्य उपयोगकर्ता द्वारा हटाई गई फ़ाइल"]},
+    correct:1
+  },
+  {
+    en:{q:"Which of these is a correct file name with extension?",opts:["Homework.txt","MyFile.text","Song-mp3","Imagefile"]},
+    hi:{q:"इनमें से कौन-सा एक्सटेंशन के साथ सही फ़ाइल नाम है?",opts:["Homework.txt","MyFile.text","Song-mp3","Imagefile"]},
+    correct:1
+  },
+  {
+    en:{q:"What does the Slide Show tab help you do?",opts:["Change font","View presentation in full screen","Insert a picture","Add a new slide"]},
+    hi:{q:"Slide Show टैब आपको क्या करने में मदद करता है?",opts:["फ़ॉन्ट बदलना","प्रस्तुति को पूर्ण स्क्रीन में देखना","चित्र डालना","नई स्लाइड जोड़ना"]},
+    correct:2
+  },
+  {
+    en:{q:"Where are files saved in cloud storage?",opts:["Printer memory","CD","Online servers","Local computer only"]},
+    hi:{q:"क्लाउड स्टोरेज में फ़ाइलें कहाँ सहेजी जाती हैं?",opts:["प्रिंटर मेमोरी","CD","ऑनलाइन सर्वर","केवल स्थानीय कंप्यूटर"]},
+    correct:3
+  },
+  {
+    en:{q:"What does a feedback form usually collect?",opts:["User opinions and ratings","Music files","Movie reviews","News reports"]},
+    hi:{q:"फीडबैक फॉर्म आमतौर पर क्या एकत्र करता है?",opts:["उपयोगकर्ता की राय और रेटिंग","संगीत फ़ाइलें","फिल्म समीक्षाएँ","समाचार रिपोर्ट"]},
+    correct:1
+  },
+  {
+    en:{q:"Which of these helps move the pointer on the screen?",opts:["Monitor","Mouse","CPU","Printer"]},
+    hi:{q:"इनमें से कौन-सा स्क्रीन पर पॉइंटर को हिलाने में मदद करता है?",opts:["मॉनिटर","माउस","CPU","प्रिंटर"]},
+    correct:2
+  },
+  {
+    en:{q:"Why is organizing files in folders important?",opts:["Folders take less space","Hides files from others","Looks colourful","Helps find files easily"]},
+    hi:{q:"फ़ोल्डर में फ़ाइलें व्यवस्थित करना क्यों महत्वपूर्ण है?",opts:["फ़ोल्डर कम स्थान लेते हैं","दूसरों से फ़ाइलें छुपाता है","रंगीन दिखता है","फ़ाइलें आसानी से खोजने में मदद करता है"]},
+    correct:4
+  },
+  {
+    en:{q:"What is the use of the Notes section?",opts:["To change slide background","To show transitions","To write speaker notes","To add images"]},
+    hi:{q:"Notes सेक्शन का उपयोग क्या है?",opts:["स्लाइड की पृष्ठभूमि बदलना","ट्रांजिशन दिखाना","वक्ता नोट्स लिखना","चित्र जोड़ना"]},
+    correct:3
+  },
+  {
+    en:{q:"What is the meaning of 'Add to Cart'?",opts:["Save the product for buying later","Share the product with friends","Compare the product","Delete the product"]},
+    hi:{q:"'कार्ट में जोड़ें' का क्या अर्थ है?",opts:["बाद में खरीदने के लिए उत्पाद सहेजें","दोस्तों के साथ उत्पाद साझा करें","उत्पाद की तुलना करें","उत्पाद हटाएँ"]},
+    correct:1
+  },
+  {
+    en:{q:"What is a repeating event?",opts:["An error in the app","An event that repeats on a set schedule","A deleted event","An event that shows once"]},
+    hi:{q:"दोहराने वाली घटना क्या है?",opts:["ऐप में एक त्रुटि","एक निर्धारित समय-सारणी पर दोहराने वाली घटना","हटाई गई घटना","एक बार दिखने वाली घटना"]},
+    correct:2
+  },
+  {
+    en:{q:"What should you do if you suspect a payment scam?",opts:["Share OTP immediately","Try again","Report and block","Refresh the page"]},
+    hi:{q:"यदि आपको भुगतान घोटाले का संदेह हो तो आपको क्या करना चाहिए?",opts:["तुरंत OTP साझा करें","फिर से प्रयास करें","रिपोर्ट करें और ब्लॉक करें","पेज रिफ्रेश करें"]},
+    correct:3
+  },
+  {
+    en:{q:"Tableau is mainly used for –",opts:["Writing documents","Advanced data visualization","Drawing cartoons","Audio editing"]},
+    hi:{q:"Tableau मुख्य रूप से किसके लिए उपयोग किया जाता है?",opts:["दस्तावेज़ लिखना","उन्नत डेटा विज़ुअलाइज़ेशन","कार्टून बनाना","ऑडियो संपादन"]},
+    correct:2
+  },
+  {
+    en:{q:"Which of these is an ethical concern in automation?",opts:["Fast work","Cheap setup","Bright screens","Job displacement"]},
+    hi:{q:"ऑटोमेशन में कौन-सी नैतिक चिंता है?",opts:["तेज़ काम","सस्ती स्थापना","चमकीली स्क्रीन","नौकरी का विस्थापन"]},
+    correct:4
+  },
+  {
+    en:{q:"What is a reminder in a digital calendar?",opts:["A message to remind you about an event","A sound setting","A wallpaper change","A game alert"]},
+    hi:{q:"डिजिटल कैलेंडर में रिमाइंडर क्या है?",opts:["किसी घटना के बारे में याद दिलाने वाला संदेश","एक ध्वनि सेटिंग","वॉलपेपर बदलाव","एक गेम अलर्ट"]},
+    correct:1
+  },
+  {
+    en:{q:"What percentage of global e-waste was properly recycled in 2019?",opts:["17%","80%","50%","33%"]},
+    hi:{q:"2019 में वैश्विक ई-कचरे का कितना प्रतिशत ठीक से पुनर्नवीनीकरण किया गया था?",opts:["17%","80%","50%","33%"]},
+    correct:1
+  },
+  {
+    en:{q:"Which built-in app is used for formatting text and adding images?",opts:["Notepad","CMD","Paint","WordPad"]},
+    hi:{q:"टेक्स्ट फ़ॉर्मेट करने और चित्र जोड़ने के लिए कौन-सा बिल्ट-इन ऐप उपयोग किया जाता है?",opts:["नोटपैड","CMD","पेंट","वर्डपैड"]},
+    correct:4
+  },
+  {
+    en:{q:"Which of these uses data analytics?",opts:["Hospitals","Shops","Banks","All of the above"]},
+    hi:{q:"इनमें से कौन डेटा एनालिटिक्स का उपयोग करता है?",opts:["अस्पताल","दुकानें","बैंक","उपरोक्त सभी"]},
+    correct:4
+  },
+  {
+    en:{q:"The CPU in a computer is also known as:",opts:["Eyes of the computer","Brain of the computer","Hands of the computer","Writer of the computer"]},
+    hi:{q:"कंप्यूटर में CPU को किस नाम से भी जाना जाता है?",opts:["कंप्यूटर की आँखें","कंप्यूटर का मस्तिष्क","कंप्यूटर के हाथ","कंप्यूटर का लेखक"]},
+    correct:2
+  },
+  {
+    en:{q:"Draw a smiley face using shapes in Paint.",opts:["Open Paint, draw a square and save","Open Paint, draw a circle, add eyes and smile, add colour and save as Smiley.png","Open Notepad and draw using keyboard","Open MS Word and insert shapes"]},
+    hi:{q:"Paint में आकृतियों का उपयोग करके एक स्माइली चेहरा बनाएं।",opts:["Paint खोलें, एक वर्ग बनाएं और सेव करें","Paint खोलें, वृत्त बनाएं, आँखें और मुस्कान जोड़ें, रंग लगाएं और Smiley.png के रूप में सेव करें","Notepad खोलें और कीबोर्ड से बनाएं","MS Word खोलें और आकृतियाँ डालें"]},
+    correct:2
+  },
+  {
+    en:{q:"Insert a picture and change wrap style in MS Word.",opts:["Open Word, type text, insert picture, change text wrapping to Square/Tight","Open Word, insert picture only","Open Paint, insert picture and wrap","Open Excel, insert picture and wrap"]},
+    hi:{q:"MS Word में एक चित्र डालें और रैप स्टाइल बदलें।",opts:["Word खोलें, टेक्स्ट टाइप करें, चित्र डालें, टेक्स्ट रैपिंग को Square/Tight में बदलें","Word खोलें, केवल चित्र डालें","Paint खोलें, चित्र डालें और रैप करें","Excel खोलें, चित्र डालें और रैप करें"]},
+    correct:1
+  },
+  {
+    en:{q:"How do you locate Screen Saver configuration in Windows?",opts:["Control Panel > Display > Screen Saver","Settings > Personalization > Screen Saver settings","Task Manager > Screen Saver","File Explorer > Screen Saver"]},
+    hi:{q:"Windows में Screen Saver कॉन्फ़िगरेशन कैसे खोजें?",opts:["Control Panel > Display > Screen Saver","Settings > Personalization > Screen Saver settings","Task Manager > Screen Saver","File Explorer > Screen Saver"]},
+    correct:2
+  },
+  {
+    en:{q:"How do you apply transitions and run slideshow in PowerPoint?",opts:["Download PPT, open it, add transitions to all slides, run slideshow","Open Word, add transitions","Open Excel, add transitions","Create new file and add transitions only"]},
+    hi:{q:"PowerPoint में ट्रांज़िशन कैसे लागू करें और स्लाइडशो कैसे चलाएं?",opts:["PPT डाउनलोड करें, खोलें, सभी स्लाइड में ट्रांज़िशन जोड़ें, स्लाइडशो चलाएं","Word खोलें, ट्रांज़िशन जोड़ें","Excel खोलें, ट्रांज़िशन जोड़ें","नई फ़ाइल बनाएं और केवल ट्रांज़िशन जोड़ें"]},
+    correct:1
+  },
+  {
+    en:{q:"How do you create a chart using given data in Excel?",opts:["Open Excel, select Sales data, insert a Column Chart","Open Word, select data, insert chart","Open Paint, draw a chart manually","Open Notepad, type data and save"]},
+    hi:{q:"Excel में दिए गए डेटा का उपयोग करके चार्ट कैसे बनाएं?",opts:["Excel खोलें, Sales डेटा चुनें, Column Chart डालें","Word खोलें, डेटा चुनें, चार्ट डालें","Paint खोलें, मैन्युअल रूप से चार्ट बनाएं","Notepad खोलें, डेटा टाइप करें और सेव करें"]},
+    correct:1
+  }
+];;
+const clsQuestions = [
+  {
+    en:{q:"What kind of sentences do Simple Storybooks usually have?",opts:["No sentences","Difficult sentences","Easy sentences","Very long sentences"]},
+    hi:{q:"Simple Storybooks में आमतौर पर किस तरह के वाक्य होते हैं?",opts:["कोई वाक्य नहीं","कठिन वाक्य","आसान वाक्य","बहुत लंबे वाक्य"]},
+    correct:3
+  },
+  {
+    en:{q:"Which adjective describes someone who is always happy?",opts:["Angry","Sad","Cheerful","Slow"]},
+    hi:{q:"कौन-सा विशेषण हमेशा खुश रहने वाले व्यक्ति का वर्णन करता है?",opts:["गुस्सैल","उदास","प्रसन्नचित्त","धीमा"]},
+    correct:3
+  },
+  {
+    en:{q:"What is the correct sentence using a hobby word?",opts:["She enjoys painting pictures.","He playing dancing every day.","We loves drawing.","I gardening do morning."]},
+    hi:{q:"शौक शब्द का उपयोग करते हुए सही वाक्य कौन-सा है?",opts:["She enjoys painting pictures.","He playing dancing every day.","We loves drawing.","I gardening do morning."]},
+    correct:1
+  },
+  {
+    en:{q:"Which sentence is correct for an uncountable noun?",opts:["I bought some rice.","We ate many cheese.","She picked five oils.","I have two breads."]},
+    hi:{q:"अगणनीय संज्ञा के लिए कौन-सा वाक्य सही है?",opts:["I bought some rice.","We ate many cheese.","She picked five oils.","I have two breads."]},
+    correct:1
+  },
+  {
+    en:{q:'What does "breaking words into syllables" help with?',opts:["pronunciation","vocabulary","listening","grammar"]},
+    hi:{q:"\"शब्दों को अक्षरों में तोड़ना\" किसमें मदद करता है?",opts:["उच्चारण","शब्द भंडार","सुनना","व्याकरण"]},
+    correct:1
+  },
+  {
+    en:{q:"What part of rhyming words sounds the same?",opts:["None of the above","Middle","End","Beginning"]},
+    hi:{q:"तुकबंदी वाले शब्दों का कौन-सा भाग एक जैसा सुनाई देता है?",opts:["इनमें से कोई नहीं","बीच","अंत","शुरुआत"]},
+    correct:3
+  },
+  {
+    en:{q:"Choose the correct verb tense: By 2026, she ___ in the company for 10 years.",opts:["works","has worked","will have worked","worked"]},
+    hi:{q:"सही क्रिया काल चुनें: 2026 तक, वह कंपनी में 10 साल ___ होगी।",opts:["works","has worked","will have worked","worked"]},
+    correct:3
+  },
+  {
+    en:{q:"What small change made the Thirsty Crow story different?",opts:["The pot was full of gold.","The crow used a straw.","The crow found juice instead of water.","The crow drank from a puddle."]},
+    hi:{q:"किस छोटे बदलाव ने प्यासे कौए की कहानी को अलग बनाया?",opts:["घड़ा सोने से भरा था।","कौए ने एक straw का उपयोग किया।","कौए को पानी की जगह जूस मिला।","कौए ने एक गड्ढे से पिया।"]},
+    correct:3
+  },
+  {
+    en:{q:"Which sentence correctly changes this past sentence to future tense? Past: They ate ice cream.",opts:["They will ate ice cream.","They will eat ice cream.","They will eating ice cream.","They eats ice cream."]},
+    hi:{q:"कौन-सा वाक्य इस भूतकाल के वाक्य को सही ढंग से भविष्यकाल में बदलता है? भूत: They ate ice cream.",opts:["They will ate ice cream.","They will eat ice cream.","They will eating ice cream.","They eats ice cream."]},
+    correct:2
+  },
+  {
+    en:{q:"What word is often used to show a reason for an opinion?",opts:["Or","Because","But","And"]},
+    hi:{q:"किसी राय का कारण बताने के लिए अक्सर कौन-सा शब्द उपयोग किया जाता है?",opts:["Or","Because","But","And"]},
+    correct:2
+  },
+  {
+    en:{q:"Why is it important to be polite when asking someone about their feelings?",opts:["It makes the conversation finish faster","It lets you avoid listening to their answer","It shows care, respect, and helps people feel safe","It helps you win an argument"]},
+    hi:{q:"किसी से उनकी भावनाओं के बारे में पूछते समय विनम्र रहना क्यों महत्वपूर्ण है?",opts:["इससे बातचीत जल्दी खत्म होती है","इससे आप उनका जवाब सुनने से बच सकते हैं","यह देखभाल, सम्मान दिखाता है और लोगों को सुरक्षित महसूस कराता है","इससे आपको बहस जीतने में मदद मिलती है"]},
+    correct:3
+  },
+  {
+    en:{q:"Which sentence correctly uses a third-person pronoun?",opts:["I am playing with my toys.","She is singing a song.","We are going to the park.","You are reading a book."]},
+    hi:{q:"कौन-सा वाक्य तृतीय पुरुष सर्वनाम का सही उपयोग करता है?",opts:["I am playing with my toys.","She is singing a song.","We are going to the park.","You are reading a book."]},
+    correct:2
+  },
+  {
+    en:{q:"Choose the correct sentence:",opts:["Aisha have a stomach ache.","He have a fever.","Ravi has a cold.","She have a cough."]},
+    hi:{q:"सही वाक्य चुनें:",opts:["Aisha have a stomach ache.","He have a fever.","Ravi has a cold.","She have a cough."]},
+    correct:3
+  },
+  {
+    en:{q:"Shorter episodes we watch on television or online describes what?",opts:["Cartoons","Movies","Serials","TV shows"]},
+    hi:{q:"टेलीविजन या ऑनलाइन देखे जाने वाले छोटे एपिसोड को क्या कहते हैं?",opts:["Cartoons","Movies","Serials","TV shows"]},
+    correct:1
+  },
+  {
+    en:{q:"Which Wh-question asks someone about their best friend?",opts:["Who is your best friend?","Where is your best friend?","How is your best friend?","What is your best friend?"]},
+    hi:{q:"कौन-सा Wh-प्रश्न किसी के सबसे अच्छे दोस्त के बारे में पूछता है?",opts:["Who is your best friend?","Where is your best friend?","How is your best friend?","What is your best friend?"]},
+    correct:1
+  },
+  {
+    en:{q:"Which of the following is an example of a regular past tense verb?",opts:["Took","Ate","Went","Played"]},
+    hi:{q:"निम्नलिखित में से कौन-सा नियमित भूतकाल क्रिया का उदाहरण है?",opts:["Took","Ate","Went","Played"]},
+    correct:4
+  },
+  {
+    en:{q:"What do comics use to show what characters say?",opts:["Large photos","Short articles","Speech bubbles","Easy sentences"]},
+    hi:{q:"Comics में पात्र क्या कह रहे हैं यह दिखाने के लिए क्या उपयोग किया जाता है?",opts:["बड़ी तस्वीरें","छोटे लेख","Speech bubbles","आसान वाक्य"]},
+    correct:3
+  },
+  {
+    en:{q:'If someone asks, "How are you?" what can you say?',opts:["I am fine, thank you.","My name is Rahul.","I live in India.","I study in Class 6."]},
+    hi:{q:'यदि कोई पूछे "How are you?" तो आप क्या कह सकते हैं?',opts:["I am fine, thank you.","My name is Rahul.","I live in India.","I study in Class 6."]},
+    correct:1
+  },
+  {
+    en:{q:"Which sentence correctly uses a superlative adjective for a short adjective?",opts:["She is the more fast runner here.","This building is the tallest in the street.","This cake is most sweet of all.","That road is more long than the others."]},
+    hi:{q:"कौन-सा वाक्य एक छोटे विशेषण के लिए superlative का सही उपयोग करता है?",opts:["She is the more fast runner here.","This building is the tallest in the street.","This cake is most sweet of all.","That road is more long than the others."]},
+    correct:2
+  },
+  {
+    en:{q:"What are the three key elements of confident speaking?",opts:["whispering, acting, and volume","speed, volume, and silence","eye contact, voice use, and clear speech","listening, grammar, and writing"]},
+    hi:{q:"आत्मविश्वास से बोलने के तीन मुख्य तत्व क्या हैं?",opts:["फुसफुसाना, अभिनय और आवाज़","गति, आवाज़ और मौन","आँख का संपर्क, आवाज़ का उपयोग और स्पष्ट भाषण","सुनना, व्याकरण और लिखना"]},
+    correct:3
+  },
+  {
+    en:{q:"What is a good strategy to practise pronunciation?",opts:["repeating tongue twisters","using long words","skipping vowels","speaking quickly"]},
+    hi:{q:"उच्चारण का अभ्यास करने के लिए एक अच्छी रणनीति क्या है?",opts:["tongue twisters दोहराना","लंबे शब्दों का उपयोग करना","स्वरों को छोड़ना","जल्दी बोलना"]},
+    correct:1
+  },
+  {
+    en:{q:"Which of these sentences shows a strong prediction?",opts:["It will snow next year.","It might snow next year.","It can snow next year.","It may snow next year."]},
+    hi:{q:"इनमें से कौन-सा वाक्य एक मजबूत भविष्यवाणी दिखाता है?",opts:["It will snow next year.","It might snow next year.","It can snow next year.","It may snow next year."]},
+    correct:1
+  },
+  {
+    en:{q:'What is one of the main goals of the "Types of Books We Read" lesson?',opts:["To identify different types of books and categorize them based on their content","To learn about book genres","To explore new places through stories","To write your own comic book"]},
+    hi:{q:'"Types of Books We Read" पाठ का एक मुख्य लक्ष्य क्या है?',opts:["विभिन्न प्रकार की पुस्तकों की पहचान करना और उनकी सामग्री के आधार पर वर्गीकृत करना","पुस्तक की शैलियों के बारे में जानना","कहानियों के माध्यम से नए स्थानों की खोज करना","अपनी खुद की comic book लिखना"]},
+    correct:1
+  },
+  {
+    en:{q:"Which sentence shows a dislike?",opts:["I like singing.","I do not like eggs.","I like to draw.","I like bananas."]},
+    hi:{q:"कौन-सा वाक्य नापसंदगी दर्शाता है?",opts:["I like singing.","I do not like eggs.","I like to draw.","I like bananas."]},
+    correct:2
+  },
+  {
+    en:{q:"Which of these sentences correctly uses the simple present tense to express a general fact?",opts:["The Earth turned around the sun.","The Earth turns around the sun.","The Earth is turning now.","The Earth will turn around the sun."]},
+    hi:{q:"इनमें से कौन-सा वाक्य एक सामान्य तथ्य व्यक्त करने के लिए simple present tense का सही उपयोग करता है?",opts:["The Earth turned around the sun.","The Earth turns around the sun.","The Earth is turning now.","The Earth will turn around the sun."]},
+    correct:2
+  },
+  {
+    en:{q:"Which sentence is the most polite way to ask for help?",opts:["Give me that pencil.","Help me with this!","Do this for me.","Could you help me, please?"]},
+    hi:{q:"मदद माँगने का सबसे विनम्र तरीका कौन-सा वाक्य है?",opts:["Give me that pencil.","Help me with this!","Do this for me.","Could you help me, please?"]},
+    correct:4
+  },
+  {
+    en:{q:"What should you do before speaking to avoid confusion?",opts:["use big words","speak quickly","organise your thoughts","whisper"]},
+    hi:{q:"भ्रम से बचने के लिए बोलने से पहले आपको क्या करना चाहिए?",opts:["बड़े शब्दों का उपयोग करें","जल्दी बोलें","अपने विचार व्यवस्थित करें","फुसफुसाएं"]},
+    correct:3
+  },
+  {
+    en:{q:"Which of the following sentences is written in the simple future tense?",opts:["They will go to the park.","He played football yesterday.","I am cleaning my room now.","She eats lunch every day."]},
+    hi:{q:"निम्नलिखित में से कौन-सा वाक्य simple future tense में लिखा है?",opts:["They will go to the park.","He played football yesterday.","I am cleaning my room now.","She eats lunch every day."]},
+    correct:1
+  },
+  {
+    en:{q:"What does changing your voice to match the feeling of a poem show?",opts:["Expression","Dullness","Only happiness","Silence"]},
+    hi:{q:"किसी कविता की भावना से मेल खाने के लिए आवाज़ बदलना क्या दर्शाता है?",opts:["अभिव्यक्ति","नीरसता","केवल खुशी","मौन"]},
+    correct:1
+  },
+  {
+    en:{q:"Which question is correct?",opts:["Cat is where is?","Where the cat is?","Where is cat the?","Where is the cat?"]},
+    hi:{q:"कौन-सा प्रश्न सही है?",opts:["Cat is where is?","Where the cat is?","Where is cat the?","Where is the cat?"]},
+    correct:4
+  },
+  {
+    en:{q:"Which sentence uses adjectives to describe something you can hear?",opts:["The soup is hot and spicy.","The leaves made a rustling sound.","The lemon tastes sour.","The teddy bear is soft and warm."]},
+    hi:{q:"कौन-सा वाक्य सुनी जा सकने वाली चीज़ का वर्णन करने के लिए विशेषण का उपयोग करता है?",opts:["The soup is hot and spicy.","The leaves made a rustling sound.","The lemon tastes sour.","The teddy bear is soft and warm."]},
+    correct:2
+  },
+  {
+    en:{q:"Complete the sentence with the correct opposite: \"The jar is full. The plate is __.\"",opts:["empty","loud","clean","small"]},
+    hi:{q:"सही विपरीत शब्द से वाक्य पूरा करें: \"The jar is full. The plate is __.\"",opts:["empty","loud","clean","small"]},
+    correct:1
+  },
+  {
+    en:{q:"Choose the correct sentence:",opts:["The teacher stand front class.","The teacher stands on the class.","Teacher standing before the class.","The teacher stands in front of the class."]},
+    hi:{q:"सही वाक्य चुनें:",opts:["The teacher stand front class.","The teacher stands on the class.","Teacher standing before the class.","The teacher stands in front of the class."]},
+    correct:4
+  },
+  {
+    en:{q:"Which sentence correctly uses an adjective for the sense of taste?",opts:["The music is soft.","The teddy bear is soft.","The lemonade tastes sour.","The flowers are bright."]},
+    hi:{q:"कौन-सा वाक्य स्वाद की भावना के लिए विशेषण का सही उपयोग करता है?",opts:["The music is soft.","The teddy bear is soft.","The lemonade tastes sour.","The flowers are bright."]},
+    correct:3
+  },
+  {
+    en:{q:'What is one of the main goals of the "Types of Books We Read" lesson?',opts:["To explore new places through stories","To identify different types of books and categorize them based on their content","To learn about book genres","To write your own comic book"]},
+    hi:{q:'"Types of Books We Read" पाठ का एक मुख्य लक्ष्य क्या है?',opts:["कहानियों के माध्यम से नए स्थानों की खोज करना","विभिन्न प्रकार की पुस्तकों की पहचान करना और उनकी सामग्री के आधार पर वर्गीकृत करना","पुस्तक की शैलियों के बारे में जानना","अपनी खुद की comic book लिखना"]},
+    correct:2
+  },
+  {
+    en:{q:"Which of the following sentences correctly uses the simple past tense?",opts:["We go to the museum every Saturday.","She eats pancakes for breakfast.","They are playing music at the party.","He studied English last month."]},
+    hi:{q:"निम्नलिखित में से कौन-सा वाक्य simple past tense का सही उपयोग करता है?",opts:["We go to the museum every Saturday.","She eats pancakes for breakfast.","They are playing music at the party.","He studied English last month."]},
+    correct:4
+  },
+  {
+    en:{q:"Which sentence is correct?",opts:["He opens the fridge to take juice.","He opening the fridge to take juice.","He open the fridge to take juice.","He opened the fridge to take juice every day."]},
+    hi:{q:"कौन-सा वाक्य सही है?",opts:["He opens the fridge to take juice.","He opening the fridge to take juice.","He open the fridge to take juice.","He opened the fridge to take juice every day."]},
+    correct:1
+  },
+  {
+    en:{q:'What is "body language"?',opts:["The words we speak","How we show our feelings with our body, not with words","The music we listen to","The clothes we wear"]},
+    hi:{q:"\"Body language\" क्या है?",opts:["हम जो शब्द बोलते हैं","हम अपने शरीर से अपनी भावनाएं कैसे दिखाते हैं, शब्दों से नहीं","हम जो संगीत सुनते हैं","हम जो कपड़े पहनते हैं"]},
+    correct:2
+  },
+  {
+    en:{q:"Which of the following sentences correctly uses the present simple tense to describe today's weather?",opts:["It was sunny today.","It sunny today is.","It is sunny today.","It is being sunny today."]},
+    hi:{q:"निम्नलिखित में से कौन-सा वाक्य आज के मौसम का वर्णन करने के लिए present simple tense का सही उपयोग करता है?",opts:["It was sunny today.","It sunny today is.","It is sunny today.","It is being sunny today."]},
+    correct:3
+  },
+  {
+    en:{q:"Festivals are special days of celebration that bring together:",opts:["Family and friends","Fun, traditions, and activities","Joy and colors","All of the above"]},
+    hi:{q:"त्योहार उत्सव के विशेष दिन हैं जो एक साथ लाते हैं:",opts:["परिवार और दोस्त","मज़ा, परंपराएं और गतिविधियाँ","खुशी और रंग","उपरोक्त सभी"]},
+    correct:4
+  }
+];;
+const cssQuestions = [
+  {
+    en:{q:'What would a person do before their big job interview to stay calm?',opts:['Rehearse under pressure from friends','Practice questions and do breathing exercises','Stay up all night','Avoid preparation']},
+    hi:{q:'नौकरी के बड़े इंटरव्यू से पहले शांत रहने के लिए व्यक्ति क्या करेगा?',opts:['दोस्तों के दबाव में अभ्यास करना','प्रश्नों का अभ्यास करना और सांस लेने के व्यायाम करना','रात भर जागना','तैयारी से बचना']},
+    correct:2
+  },
+  {
+    en:{q:'Which of the following could be the first step to building a strong first impression?',opts:['Bragging about achievements','Smiling genuinely and making eye contact','Sharing personal stories','Being loud and fast']},
+    hi:{q:'मजबूत पहली छाप बनाने का पहला कदम क्या हो सकता है?',opts:['उपलब्धियों के बारे में डींग मारना','सच्चे मन से मुस्कुराना और आँख मिलाना','व्यक्तिगत कहानियाँ साझा करना','तेज़ और शोरगुल वाला होना']},
+    correct:2
+  },
+  {
+    en:{q:'What kind of peer pressure is shown when others act a certain way without speaking?',opts:['Verbal pressure','Unspoken pressure','Indirect pressure','Direct pressure']},
+    hi:{q:'बिना बोले दूसरों के एक निश्चित तरीके से व्यवहार करने पर किस प्रकार का दबाव दिखता है?',opts:['मौखिक दबाव','अनकहा दबाव','अप्रत्यक्ष दबाव','प्रत्यक्ष दबाव']},
+    correct:2
+  },
+  {
+    en:{q:'What is the main purpose of keeping a "What Went Well" diary?',opts:['Listing complaints','Planning future events','Tracking mistakes','Writing three good things daily']},
+    hi:{q:'"What Went Well" डायरी रखने का मुख्य उद्देश्य क्या है?',opts:['शिकायतें सूचीबद्ध करना','भविष्य की घटनाओं की योजना बनाना','गलतियों को ट्रैक करना','प्रतिदिन तीन अच्छी चीजें लिखना']},
+    correct:4
+  },
+  {
+    en:{q:'Which of these is a financial habit that builds peace of mind?',opts:['Spending all the money as soon as it is received.','Spending money only on luxuries.','Ignoring financial goals and living for the moment.','Tracking expenses and saving consistently.']},
+    hi:{q:'इनमें से कौन-सी वित्तीय आदत मन की शांति बनाती है?',opts:['पैसा मिलते ही खर्च कर देना।','केवल विलासिता पर पैसा खर्च करना।','वित्तीय लक्ष्यों को नज़रअंदाज़ करना।','खर्चों को ट्रैक करना और नियमित बचत करना।']},
+    correct:4
+  },
+  {
+    en:{q:'Which approach demonstrates effective problem solving and logical thinking?',opts:['Ignore all options and wait for someone else to solve it','Rely solely on luck and hope for a solution','Analyse the situation, consider possible solutions, and choose the best one','Take immediate action without understanding the problem']},
+    hi:{q:'कौन-सा तरीका प्रभावी समस्या-समाधान और तार्किक सोच को दर्शाता है?',opts:['सभी विकल्पों को नज़रअंदाज़ करें और किसी और का इंतज़ार करें','केवल किस्मत पर निर्भर रहें','स्थिति का विश्लेषण करें, संभावित समाधान सोचें और सर्वोत्तम चुनें','समस्या समझे बिना तुरंत कार्रवाई करें']},
+    correct:3
+  },
+  {
+    en:{q:'What helped P.V. Sindhu succeed, besides talent and hard work?',opts:['Strong support from her coach, family, and mentors','Fewer matches to play','A lucky tournament draw','Her rival\'s injuries']},
+    hi:{q:'प्रतिभा और कड़ी मेहनत के अलावा P.V. सिंधु को सफलता में क्या मदद मिली?',opts:['कोच, परिवार और mentors का मजबूत समर्थन','कम मैच खेलना','भाग्यशाली टूर्नामेंट ड्रॉ','प्रतिद्वंद्वी की चोटें']},
+    correct:1
+  },
+  {
+    en:{q:'What is the first step in the "Reflect, Learn, Act" method?',opts:['Avoid failure','Seek blame','Reflect on what happened','Take action immediately']},
+    hi:{q:'"Reflect, Learn, Act" विधि में पहला कदम क्या है?',opts:['विफलता से बचना','दोष ढूंढना','जो हुआ उस पर विचार करना','तुरंत कार्रवाई करना']},
+    correct:3
+  },
+  {
+    en:{q:'What is an effective way to deal with obstacles at work or in personal goals?',opts:['Ignore the problem and hope it goes away','Give up on the goal as soon as a challenge appears','Analyse the obstacle, find solutions, and keep moving forward','Blame others for the obstacle instead of taking responsibility']},
+    hi:{q:'काम या व्यक्तिगत लक्ष्यों में बाधाओं से निपटने का प्रभावी तरीका क्या है?',opts:['समस्या को नज़रअंदाज़ करें और उम्मीद करें कि यह चली जाएगी','चुनौती आते ही लक्ष्य छोड़ दें','बाधा का विश्लेषण करें, समाधान खोजें और आगे बढ़ते रहें','जिम्मेदारी लेने के बजाय दूसरों को दोष दें']},
+    correct:3
+  },
+  {
+    en:{q:'What habit could help one to top competitive exams?',opts:['Following a disciplined time management routine','Joining a coaching center','Studying all night','Studying with friends']},
+    hi:{q:'प्रतियोगी परीक्षाओं में शीर्ष पर आने में कौन-सी आदत मदद कर सकती है?',opts:['अनुशासित समय प्रबंधन दिनचर्या का पालन करना','कोचिंग सेंटर में शामिल होना','रात भर पढ़ना','दोस्तों के साथ पढ़ना']},
+    correct:1
+  },
+  {
+    en:{q:'Which method can prevent pollution from stubble burning?',opts:['Creating chemical fertilisers','Asking farmers to stop farming','Turning stubble into useful products','Burning waste more cleanly']},
+    hi:{q:'पराली जलाने से होने वाले प्रदूषण को कौन-सी विधि रोक सकती है?',opts:['रासायनिक उर्वरक बनाना','किसानों को खेती बंद करने के लिए कहना','पराली को उपयोगी उत्पादों में बदलना','कचरे को अधिक साफ-सफाई से जलाना']},
+    correct:3
+  },
+  {
+    en:{q:'Which of the following shows respect in communication?',opts:['Raising your voice to win an argument','Avoiding eye contact','Mocking others lightly','Listening without interrupting']},
+    hi:{q:'निम्नलिखित में से कौन-सा संचार में सम्मान दर्शाता है?',opts:['बहस जीतने के लिए आवाज़ उठाना','आँख मिलाने से बचना','दूसरों का हल्के में मज़ाक उड़ाना','बिना रोके सुनना']},
+    correct:4
+  },
+  {
+    en:{q:'What role does constraint play in creativity?',opts:['It blocks innovation','It leads to perfectionism','It can spark powerful, innovative thinking','It slows down work']},
+    hi:{q:'रचनात्मकता में बाधा क्या भूमिका निभाती है?',opts:['यह नवाचार को रोकती है','यह पूर्णतावाद की ओर ले जाती है','यह शक्तिशाली, नवीन सोच को जगा सकती है','यह काम धीमा करती है']},
+    correct:3
+  },
+  {
+    en:{q:'Which of the following is NOT a recommended tip for improving communication?',opts:['Use long and detailed sentences','Ask questions if unclear','Think before you speak','Listen fully before replying']},
+    hi:{q:'निम्नलिखित में से कौन-सा संचार सुधारने का अनुशंसित सुझाव नहीं है?',opts:['लंबे और विस्तृत वाक्यों का उपयोग करें','अस्पष्ट होने पर प्रश्न पूछें','बोलने से पहले सोचें','उत्तर देने से पहले पूरा सुनें']},
+    correct:1
+  },
+  {
+    en:{q:'What can a person usually do when they find money?',opts:['Use it to buy books','Give it to a friend','Look for the owner and return it','Donate it to a charity']},
+    hi:{q:'पैसे मिलने पर व्यक्ति आमतौर पर क्या कर सकता है?',opts:['किताबें खरीदने के लिए उपयोग करना','किसी दोस्त को देना','मालिक को ढूंढकर वापस करना','किसी दान में देना']},
+    correct:3
+  },
+  {
+    en:{q:'Which of the following could make a strong first impression during an internship interview?',opts:['Having the highest marks','Memorising all the company details','Wearing a formal suit','Showing confidence through smile and tone']},
+    hi:{q:'इंटर्नशिप इंटरव्यू में मजबूत पहली छाप बनाने में निम्नलिखित में से क्या मदद कर सकता है?',opts:['सबसे अधिक अंक होना','सभी कंपनी विवरण याद करना','औपचारिक सूट पहनना','मुस्कान और लहजे से आत्मविश्वास दिखाना']},
+    correct:4
+  },
+  {
+    en:{q:'What is one way to manage time better?',opts:['Break tasks down and track progress','Chat less and stay late','Avoid taking breaks','Focus on unimportant tasks']},
+    hi:{q:'समय को बेहतर तरीके से प्रबंधित करने का एक तरीका क्या है?',opts:['कार्यों को छोटे हिस्सों में बाँटें और प्रगति ट्रैक करें','कम बात करें और देर से काम करें','ब्रेक लेने से बचें','अमहत्वपूर्ण कार्यों पर ध्यान दें']},
+    correct:1
+  },
+  {
+    en:{q:'Why is managing resources important?',opts:['It ensures resources are wasted unnecessarily','It helps achieve goals efficiently','It prevents planning for the future','It makes work slower and harder']},
+    hi:{q:'संसाधनों का प्रबंधन क्यों महत्वपूर्ण है?',opts:['यह संसाधनों को अनावश्यक रूप से बर्बाद करता है','यह लक्ष्यों को कुशलतापूर्वक प्राप्त करने में मदद करता है','यह भविष्य की योजना बनाने से रोकता है','यह काम धीमा और कठिन बनाता है']},
+    correct:2
+  },
+  {
+    en:{q:'What could time generally be compared to in terms of its nature?',opts:['A train that never stops','A tree that grows','A clock on the wall','Water in your hand']},
+    hi:{q:'अपनी प्रकृति के संदर्भ में समय की तुलना आमतौर पर किससे की जा सकती है?',opts:['एक ट्रेन जो कभी नहीं रुकती','एक बढ़ता हुआ पेड़','दीवार पर घड़ी','हाथ में पानी']},
+    correct:1
+  },
+  {
+    en:{q:'What distinguishes an emotionally intelligent response to critical feedback?',opts:['Ignoring the feedback','Listening, asking clarifying questions, and focusing on improvement','Interrupting to defend oneself','Complaining about others']},
+    hi:{q:'आलोचनात्मक प्रतिक्रिया पर भावनात्मक रूप से बुद्धिमान प्रतिक्रिया क्या होती है?',opts:['प्रतिक्रिया को नज़रअंदाज़ करना','सुनना, स्पष्टीकरण के प्रश्न पूछना और सुधार पर ध्यान देना','बचाव के लिए बीच में बोलना','दूसरों के बारे में शिकायत करना']},
+    correct:2
+  }
+];;
+
+const SECTIONS = {
+  cit: { name:'BS-CIT', questions: citQuestions, timer: 60*60, total: citQuestions.length },
+  cls: { name:'BS-CLS', questions: clsQuestions, timer: 40*60, total: clsQuestions.length },
+  css: { name:'BS-CSS', questions: cssQuestions, timer: 20*60, total: cssQuestions.length }
+};
+
+// ===== LANDING STATE =====
+const LT = {
+  en:{bar:'Final Exam for KYP',instr:'Instructions',choose:'Choose a section to attempt',t1:'60 min',t2:'40 min',t3:'20 min',cont:'CONTINUE'},
+  hi:{bar:'KYP के लिए अंतिम परीक्षा',instr:'निर्देश',choose:'प्रयास करने के लिए एक section चुनें',t1:'60 मिनट',t2:'40 मिनट',t3:'20 मिनट',cont:'जारी रखें'}
+};
+
+let currentSection = 'cit';
+let lang = 'en';
+
+function selectSec(k) {
+  currentSection = k;
+  document.querySelectorAll('.section-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('card-' + k).classList.add('selected');
+  document.getElementById('selLabel').textContent = SECTIONS[k].name;
+}
+
+function changeLang(v) {
+  lang = v;
+  const L = LT[v];
+  document.getElementById('examBarTitle').textContent = L.bar;
+  document.getElementById('instrHead').textContent = L.instr;
+  document.getElementById('chooseTitle').textContent = L.choose;
+  document.getElementById('contBtn').textContent = L.cont;
+  document.querySelectorAll('.tval').forEach(el => {
+    el.textContent = L[el.dataset.key];
+  });
+  if (quizActive) renderQuestion();
+}
+
+// ===== QUIZ STATE =====
+let questions = [];
+let currentQ = 0;
+let answers = [];
+let laterFlags = [];
+let timerInterval = null;
+let totalSeconds = 0;
+let quizActive = false;
+
+function startExam() {
+  const sec = SECTIONS[currentSection];
+  questions = sec.questions;
+  answers = new Array(questions.length).fill(null);
+  laterFlags = new Array(questions.length).fill(false);
+  currentQ = 0;
+  totalSeconds = sec.timer;
+  quizActive = true;
+
+  // Update UI
+  document.getElementById('examBarTitle').textContent = 'Final Exam for ' + sec.name;
+  document.getElementById('endBtn').style.display = 'block';
+  document.getElementById('demoBadge').style.display = 'block';
+  document.getElementById('qSubject').textContent = sec.name;
+  document.getElementById('resultsTitle').textContent = sec.name + ' Exam Results';
+  document.getElementById('scoreOut').textContent = 'out of ' + sec.total;
+
+  document.getElementById('landingPage').style.display = 'none';
+  document.getElementById('quizPage').style.display = 'flex';
+  document.getElementById('resultsPage').style.display = 'none';
+
+  buildGrid();
+  renderQuestion();
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    totalSeconds--;
+    if (totalSeconds <= 0) { totalSeconds = 0; clearInterval(timerInterval); submitTest(); }
+    const m = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+    const s = (totalSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('timerDisplay').textContent = m + ':' + s;
+  }, 1000);
+}
+
+function buildGrid() {
+  const grid = document.getElementById('qGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < questions.length; i++) {
+    const btn = document.createElement('div');
+    btn.className = 'q-circle';
+    btn.id = 'qc-' + i;
+    btn.textContent = i + 1;
+    btn.onclick = () => goTo(i);
+    grid.appendChild(btn);
+  }
+  updateGrid();
+}
+
+function updateGrid() {
+  for (let i = 0; i < questions.length; i++) {
+    const btn = document.getElementById('qc-' + i);
+    if (!btn) continue;
+    btn.className = 'q-circle';
+    if (i === currentQ) btn.classList.add('current');
+    else if (laterFlags[i]) btn.classList.add('later');
+    else if (answers[i] !== null) btn.classList.add('attempted');
+  }
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  const data = q[lang] || q['en'];
+  document.getElementById('qLabel').textContent = 'QUESTION NO ' + (currentQ + 1);
+  document.getElementById('qText').textContent = data.q;
+
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  data.opts.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option' + (answers[currentQ] === i ? ' selected' : '');
+    div.innerHTML = '<span class="option-num">' + (i + 1) + '.</span><span>' + opt + '</span>';
+    div.onclick = () => selectOption(i);
+    grid.appendChild(div);
+  });
+
+  document.getElementById('prevBtn').disabled = currentQ === 0;
+  document.getElementById('laterCheck').checked = laterFlags[currentQ];
+
+  const nextBtn = document.getElementById('nextBtn');
+  if (currentQ === questions.length - 1) {
+    nextBtn.textContent = 'SUBMIT ▶';
+    nextBtn.onclick = confirmEnd;
+  } else {
+    nextBtn.textContent = 'NEXT ▶';
+    nextBtn.onclick = () => navigate(1);
+  }
+  updateGrid();
+}
+
+function selectOption(idx) {
+  answers[currentQ] = idx;
+  laterFlags[currentQ] = false;
+  document.getElementById('laterCheck').checked = false;
+  renderQuestion();
+}
+
+function navigate(dir) {
+  currentQ = Math.max(0, Math.min(questions.length - 1, currentQ + dir));
+  renderQuestion();
+}
+
+function goTo(i) {
+  currentQ = i;
+  renderQuestion();
+}
+
+function toggleLater() {
+  laterFlags[currentQ] = document.getElementById('laterCheck').checked;
+  if (laterFlags[currentQ]) answers[currentQ] = null;
+  updateGrid();
+}
+
+function confirmEnd() {
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+
+function submitTest() {
+  closeModal();
+  clearInterval(timerInterval);
+  quizActive = false;
+  showResults();
+}
+
+function showResults() {
+  document.getElementById('quizPage').style.display = 'none';
+  document.getElementById('resultsPage').style.display = 'flex';
+
+  let score = 0;
+  const tbody = document.getElementById('resultsBody');
+  tbody.innerHTML = '';
+
+  questions.forEach((q, i) => {
+    const data = q[lang] || q['en'];
+    const ans = answers[i];
+    const correctIdx = q.correct - 1;
+    const isCorrect = ans === correctIdx;
+    const isSkipped = ans === null;
+    if (isCorrect) score++;
+
+    const row = document.createElement('tr');
+    row.className = isSkipped ? 'skipped' : isCorrect ? 'correct' : 'wrong';
+    const yourAns = isSkipped ? '—' : data.opts[ans];
+    const correctAns = data.opts[correctIdx];
+    const status = isSkipped ? '⬜ Not Attempted' : isCorrect ? '✅ Correct' : '❌ Wrong';
+    row.innerHTML =
+      '<td><b>' + (i + 1) + '</b></td>' +
+      '<td>' + data.q + '</td>' +
+      '<td>' + yourAns + '</td>' +
+      '<td>' + correctAns + '</td>' +
+      '<td>' + status + '</td>';
+    tbody.appendChild(row);
+  });
+
+  const total = questions.length;
+  const pct = Math.round((score / total) * 100);
+  document.getElementById('scoreBig').textContent = score;
+  document.getElementById('scorePct').textContent = pct + '%';
+  const badge = document.getElementById('passBadge');
+  badge.textContent = pct >= 60 ? '🎉 PASS' : '❌ FAIL';
+  badge.className = 'pass-badge ' + (pct >= 60 ? 'pass' : 'fail');
+}
+
+function retryTest() {
+  answers = new Array(questions.length).fill(null);
+  laterFlags = new Array(questions.length).fill(false);
+  currentQ = 0;
+  totalSeconds = SECTIONS[currentSection].timer;
+  quizActive = true;
+
+  document.getElementById('resultsPage').style.display = 'none';
+  document.getElementById('quizPage').style.display = 'flex';
+  buildGrid();
+  renderQuestion();
+  startTimer();
+}
+
+function kypGoHome() {
+  clearInterval(timerInterval);
+  quizActive = false;
+  currentSection = 'cit';
+  lang = document.getElementById('langSel').value;
+
+  document.getElementById('endBtn').style.display = 'none';
+  document.getElementById('demoBadge').style.display = 'none';
+  document.getElementById('examBarTitle').textContent = LT[lang].bar;
+  document.getElementById('resultsPage').style.display = 'none';
+  document.getElementById('quizPage').style.display = 'none';
+  document.getElementById('landingPage').style.display = 'block';
+  selectSec('cit');
+}
+
+
+// Init landing
+selectSec('cit');
+</script>
+</body>
+</html>
